@@ -8,6 +8,8 @@
 #include "timing.h"   
 #include "lab_tasks.h"
 
+//Compiler : C++23
+
 int main()
 {
     system("chcp 65001");
