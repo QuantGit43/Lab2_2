@@ -1,5 +1,4 @@
 #pragma once
-// Взято з вашого файлу timing.h
 
 #include <iostream>
 #include <chrono>

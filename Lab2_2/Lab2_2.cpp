@@ -14,7 +14,7 @@ int main()
 {
     system("chcp 65001");
     std::cout << "========================================================\n";
-    std::cout << "Optimization: [No optimization]\n";
+    std::cout << "Optimization: [Max optimization]\n";
 
     const unsigned int num_cores = std::thread::hardware_concurrency();
     std::cout << "Hardware concurrency (CPU threads): " << num_cores << "\n";

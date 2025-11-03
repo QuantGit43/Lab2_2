@@ -1,15 +1,12 @@
-#include "lab_tasks.h" // Включаємо наш власний заголовковий файл
+#include "lab_tasks.h"
 
-#include <random>       // Для std::mt19937
-#include <algorithm>    // Для std::generate, std::max_element
-#include <numeric>      // Для std::adjacent_difference
-#include <thread>       //
-#include <latch>        //
-#include <cmath>        // Для std::min
+#include <random>     
+#include <algorithm>  
+#include <numeric>    
+#include <thread>     
+#include <latch>      
+#include <cmath>      
 
-/**
- * @brief Створює вектор випадкових даних.
- */
 std::vector<DataType> create_random_data(size_t size)
 {
     std::vector<DataType> data(size);
@@ -19,9 +16,6 @@ std::vector<DataType> create_random_data(size_t size)
     return data;
 }
 
-// ----------------------------------------------------------------------------
-// ЗАВДАННЯ 1: Реалізація
-// ----------------------------------------------------------------------------
 DataType find_max_diff_serial(const std::vector<DataType>& data)
 {
     if (data.size() < 2) return 0;
@@ -31,9 +25,6 @@ DataType find_max_diff_serial(const std::vector<DataType>& data)
     return (max_it == diffs.end()) ? MIN_DIFF : *max_it;
 }
 
-// ----------------------------------------------------------------------------
-// ЗАВДАННЯ 3: Реалізація
-// ----------------------------------------------------------------------------
 DataType find_max_diff_custom(const std::vector<DataType>& data, unsigned int K)
 {
     if (data.size() < 2) return 0;
@@ -42,10 +33,9 @@ DataType find_max_diff_custom(const std::vector<DataType>& data, unsigned int K)
     std::vector<DataType> local_maxes(K, MIN_DIFF);
     size_t chunk_size = (data.size() + K - 1) / K;
 
-    // Використовуємо std::latch, як показано у latches.cpp
     std::latch work_done(K);
 
-    std::vector<std::thread> threads; //
+    std::vector<std::thread> threads; 
     threads.reserve(K);
 
     for (unsigned int i = 0; i < K; ++i)
@@ -58,7 +48,7 @@ DataType find_max_diff_custom(const std::vector<DataType>& data, unsigned int K)
 
             if (end_idx <= op_start_idx + 1)
             {
-                work_done.count_down(); //
+                work_done.count_down(); 
                 return;
             }
 
@@ -77,11 +67,11 @@ DataType find_max_diff_custom(const std::vector<DataType>& data, unsigned int K)
                     local_diffs.end());
             }
 
-            work_done.count_down(); //
+            work_done.count_down(); 
             });
     }
 
-    work_done.wait(); //
+    work_done.wait(); 
 
     for (auto& t : threads)
     {

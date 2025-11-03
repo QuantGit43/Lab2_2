@@ -1,19 +1,17 @@
 #pragma once
 
 #include <vector>
-#include <cstdint>      // Для int64_t
-#include <limits>       // Для std::numeric_limits
-#include <numeric>      // Для std::reduce
-#include <algorithm>    // Для std::max
-#include <execution>    // Для std::adjacent_difference з політикою
+#include <cstdint>    
+#include <limits>     
+#include <numeric>    
+#include <algorithm>  
+#include <execution>  
 
-// --- Загальні типи та константи ---
 using DataType = int64_t;
 constexpr DataType DATA_MIN = -1'000'000'000;
 constexpr DataType DATA_MAX = 1'000'000'000;
 constexpr DataType MIN_DIFF = std::numeric_limits<DataType>::min();
 
-// --- Оголошення функцій ---
 
 std::vector<DataType> create_random_data(size_t size);
 
